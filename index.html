@@ -1,14 +1,28 @@
 <!DOCTYPE html>
 <html lang="pl">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <script src="index.js" defer type="module"></script>
     <title>Odin Battleship</title>
-</head>
-<body>
+  </head>
+  <body>
     <section class="container">
-        <section class="main"></section>
-        <section class="menu"></section>
+      <section class="main">
+        <section class="enemy">
+          <div class="name">Enemy</div>
+          <div class="grid"></div>
+        </section>
+        <section class="turn"><div id="turnIO">Player Turn</div></section>
+        <section class="player">
+          <div class="grid"></div>
+          <div class="name">Player</div>
+        </section>
+      </section>
+      <section class="menu">
+        <button id="reset">Reset</button><button id="start">Start</button>
+      </section>
     </section>
-</body>
+  </body>
 </html>
