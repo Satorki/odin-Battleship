@@ -1,26 +1,47 @@
+import { Ship } from "./ship.js";
+
+const fregate3 = Ship(3, "three");
+fregate3.create();
+
 function Gameboard() {
-  let gridOperational = [];
-  function squareGenerator(wichGrid) {
+  let gameboardArray = [];
+
+  function create(wichGrid) {
     const gridDom = document.querySelector(wichGrid);
     for (let i = 0; i < 100; i++) {
       let newSquare = document.createElement("div");
-      newSquare.classList.add("square");
+      newSquare.classList.add("square", i);
       gridDom.appendChild(newSquare);
       newSquare.textContent = i;
-      gridOperational.push(i);
+      gameboardArray.push(i);
     }
   }
-  function addShip(name,param) {
-    const position = param;
-    gridOperational.forEach((element) => {
-      if (element === position[0]) {
-        element = name
-      }
+
+  function shipAdd() {
+    const position = fregate3.drop();
+    gameboardArray.forEach((gameboardel) => {
+      position.forEach((positionel) => {
+        if (gameboardel === positionel) {
+          gameboardArray.splice(gameboardel, 1, "x");
+        }
+      });
     });
-    console.table(gridOperational);
+    const playerGrid = document.querySelector(".player .grid");
+    playerGrid.addEventListener("mouseup", showShips);
   }
 
-  return { squareGenerator, addShip };
+  function showMiss() {}
+  function showHit() {}
+  function showShips() {
+    const playerGridSquare = document.querySelectorAll(".player .grid .square");
+    playerGridSquare.forEach((gridel) => {
+      if (!gameboardArray.includes(parseInt(gridel.classList[1]))) {
+        gridel.classList.add("fregatePlaced")
+      }
+    });
+  }
+
+  return { create, shipAdd, showShips };
 }
 
 export { Gameboard };

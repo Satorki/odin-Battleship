@@ -70,6 +70,7 @@ body {
 }
 .enemy .square {
   box-shadow: inset 0 0 1px 1px #000000;
+  font-size: 1.2rem;
 }
 
 /* TURN SIDE */
@@ -102,6 +103,9 @@ body {
 }
 .fregateHead {
   background-color: #e23636;
+}
+.fregatePlaced {
+  background-color: #6eb24e;
 }
 .shipSector {
   height: 130px;
