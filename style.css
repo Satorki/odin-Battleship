@@ -95,6 +95,12 @@ body {
   font-size: 1.2rem;
   text-align: center;
 }
+.shipSector {
+  height: 130px;
+  display: flex;
+  gap: 25px;
+  align-items: end;
+}
 .fregateSquare {
   width: 30px;
   height: 30px;
@@ -104,15 +110,19 @@ body {
 .fregateHead {
   background-color: #e23636;
 }
-.fregatePlaced {
+.fregateGrabed {
+  position: absolute;
+  transition: 0ms;
+  transform: translate(0px, 0px);
+  top: 2px;
+  left: -15px;
+}
+
+.player .fregatePlaced {
   background-color: #6eb24e;
+  box-shadow: inset 0 0 1px 1px #000;
 }
-.shipSector {
-  height: 130px;
-  display: flex;
-  gap: 25px;
-  align-items: end;
-}
+
 .catched {
   width: 30px;
   height: 30px;

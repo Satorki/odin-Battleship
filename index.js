@@ -3,9 +3,23 @@ import { Ship } from "./src/ship.js";
 
 const gameboard = Gameboard();
 gameboard.create(".player .grid");
-//gameboard.create(".enemy .grid");
-gameboard.shipAdd()
 
+const fregate4 = Ship(4, "four");
+fregate4.create();
+fregate4.grab();
+const fregate3 = Ship(3, "three");
+fregate3.create();
+fregate3.grab();
+
+fregate4.drop((coordinates) => {
+  gameboard.shipAdd(coordinates)
+});
+
+// fregate3.drop((coordinates) => {
+//   gameboard.shipAdd(coordinates)
+// });
+
+//gameboard.create(".enemy .grid");
 // const fregate4 = Ship(4, "four");
 // const fregate3 = Ship(3, "three");
 // const fregate2 = Ship(2, "two");
