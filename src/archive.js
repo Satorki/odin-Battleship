@@ -135,3 +135,22 @@
 // // fregate1.create();
 
 // //___________________TESTING____________________//
+
+// drop() {
+//     return new Promise((resolve, reject) => {
+//       let position;
+//       const getPos = document.getElementById("pos");
+//       const getPosBtn = document.getElementById("start");
+
+//       getPosBtn.addEventListener("click", () => {
+//         position = parseInt(getPos.value);
+//         resolve(position);
+//       });
+//     });
+//   }
+
+// const getPosBtn = document.getElementById("start");
+// getPosBtn.addEventListener("click", async () => {
+//   const position = await boardBehaviour.drop()
+//   console.log(boardBehaviour.add(frigate4, playerBoard.generate(), position));
+// });

@@ -1,17 +1,43 @@
 class Behaviours {
-  rotate() {}
-  grab() {}
-  drop() {
-    return new Promise((resolve, reject) => {
-      let position;
-      const getPos = document.getElementById("pos");
-      const getPosBtn = document.getElementById("start");
+  rotate() {
+    const shipBody = document.querySelectorAll(".thisShip");
 
-      getPosBtn.addEventListener("click", () => {
-        position = parseInt(getPos.value);
-        resolve(position);
+    shipBody.forEach((body) => {
+      body.addEventListener("dblclick", () => {
+        if (body.classList.value === "thisShip flip") {
+          body.classList.remove("flip")
+        } else
+        body.classList.add("flip");
       });
     });
+
+  }
+  grabAndDrop() {
+    const playerGrid = document.querySelector(".player .grid");
+    const shipBody = document.querySelectorAll(".thisShip");
+
+    function dragStart(event) {
+      event.dataTransfer.setData("text/plain", event.target.id);
+    }
+
+    shipBody.forEach((element) => {
+      element.setAttribute("draggable", "true");
+      element.addEventListener("dragstart", dragStart);
+    });
+
+    const dragOver = (e) => {
+      e.preventDefault();
+    };
+
+    const dropOver = (e) => {
+      e.preventDefault();
+      const shipId = e.dataTransfer.getData("text/plain");
+      const draggedShip = document.getElementById(shipId);
+      playerGrid.appendChild(draggedShip);
+    };
+
+    playerGrid.addEventListener("dragover", dragOver);
+    playerGrid.addEventListener("drop", dropOver);
   }
 
   add(ship, board, position) {
@@ -24,11 +50,21 @@ class Behaviours {
     }
 
     board.splice(where, howLong, ...body);
-
+    console.log(board);
     return board;
   }
 
-  randomize() {}
+  randomize(ships, board) {
+    const randomPosition = Math.floor(Math.random() * 90);
+    let position = randomPosition;
+
+    ships.forEach((element) => {
+      this.add(element, board, position * element.length);
+    });
+
+    //console.log(board);
+    return board;
+  }
 }
 
 export { Behaviours };

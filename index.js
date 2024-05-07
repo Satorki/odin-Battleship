@@ -5,27 +5,32 @@ import { Owner } from "./src/owner.js";
 
 // BOARD CREATED
 const playerBoard = new Board("player", 10, 10);
-const enemyBoard = new Board("enemy", 10, 10)
-playerBoard.generateDom(".player .grid")
-enemyBoard.generateDom(".enemy .grid")
+const enemyBoard = new Board("enemy", 10, 10);
+playerBoard.generateDom(".player .grid");
+enemyBoard.generateDom(".enemy .grid");
+
 // SHIPS CREATED
-const fregate1 = new Ship("fregate1", 1);
-const fregate2 = new Ship("fregate2", 2);
-const fregate3 = new Ship("fregate3", 3);
-const fregate4 = new Ship("fregate4", 4);
-fregate1.generateDom()
-// ADDED SHIPS FOR PLAYER
-const player = new Owner(fregate1, fregate2, fregate3, fregate4);
-// ADDED SHIPS FOR ENEMY
-const enemy = new Owner(fregate1, fregate2, fregate3, fregate4);
+const frigate1 = new Ship("frigate1", 1);
+const frigate2 = new Ship("frigate2", 2);
+const frigate3 = new Ship("frigate3", 3);
+const frigate4 = new Ship("frigate4", 4);
+frigate1.generateDom();
+frigate2.generateDom();
+frigate3.generateDom();
+frigate4.generateDom();
+
+// ADDED SHIPS FOR PLAYER and ENEMY
+const player = new Owner(frigate1, frigate2, frigate3, frigate4);
+const enemy = new Owner(frigate1, frigate2, frigate3, frigate4);
+
 // BEHAVIOURS STARTED
-const boardBehaviour = new Behaviours();
+const behaviours = new Behaviours();
+behaviours.grabAndDrop();
+behaviours.rotate();
+// behaviours.randomize(player.shipS, playerBoard.generate());
 
-const getPosBtn = document.getElementById("start");
-
-getPosBtn.addEventListener("click", async () => {
-  const position = await boardBehaviour.drop()
-  console.log(boardBehaviour.add(fregate4, playerBoard.generate(), position));
+document.addEventListener("drop", (e) => {
+  // console.log(e.target.classList[1]);
+  behaviours.add(frigate1,playerBoard.generate(),e.target.classList[1])
+  behaviours.add(frigate4, playerBoard.generate(), e.target.classList[1]);
 });
-
-
