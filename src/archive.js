@@ -154,3 +154,12 @@
 //   const position = await boardBehaviour.drop()
 //   console.log(boardBehaviour.add(frigate4, playerBoard.generate(), position));
 // });
+
+
+  // generate() {
+  //   const shipBody = [];
+  //   for (let i = 0; i < this.length; i++) {
+  //     shipBody.push("x");
+  //   }
+  //   return shipBody;
+  // }

@@ -4,13 +4,7 @@ class Board {
     this.height = height;
     this.width = width;
   }
-  generate() {
-    const boardParameters = [];
-    for (let i = 0; i < this.height * this.width; i++) {
-      boardParameters.push(i);
-    }
-    return boardParameters;
-  }
+
   generateDom(owner) {
     const gridDom = document.querySelector(owner);
     gridDom.style.gridTemplate = `repeat(${this.width}, 35px) / repeat(${this.height}, 35px)`;
@@ -21,6 +15,14 @@ class Board {
       newSquare.textContent = i;
     }
   }
+
+  // generate() {
+  //   const boardParameters = [];
+  //   for (let i = 0; i < this.height * this.width; i++) {
+  //     boardParameters.push(i);
+  //   }
+  //   return boardParameters;
+  // }
 }
 
 export { Board };
