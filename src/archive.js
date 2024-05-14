@@ -2,6 +2,8 @@
 //   const sector = document.querySelector(".shipSector");
 //   const shipArray = [];
 
+import { Behaviours } from "./behaviours";
+
 //   function create() {
 //     const separate = document.createElement("div");
 //     sector.appendChild(separate);
@@ -155,11 +157,131 @@
 //   console.log(boardBehaviour.add(frigate4, playerBoard.generate(), position));
 // });
 
+// generate() {
+//   const shipBody = [];
+//   for (let i = 0; i < this.length; i++) {
+//     shipBody.push("x");
+//   }
+//   return shipBody;
+// }
 
-  // generate() {
-  //   const shipBody = [];
-  //   for (let i = 0; i < this.length; i++) {
-  //     shipBody.push("x");
-  //   }
-  //   return shipBody;
-  // }
+//  Behaviours:
+
+// positionOffset;
+// mouseDropPosition;
+// shipLength;
+// flipped;
+
+// rotate() {
+//   const shipBody = document.querySelectorAll(".thisShip");
+//   let rotated = false;
+
+//   shipBody.forEach((body) => {
+//     body.addEventListener("dblclick", () => {
+//       if (body.classList.value === "thisShip flip") {
+//         this.rotated = false;
+//         body.classList.remove("flip");
+//       } else {
+//         this.rotated = true;
+//         body.classList.add("flip");
+//       }
+//     });
+//   });
+// }
+
+// grabDrop() {
+//   const playerGrid = document.querySelector(".player .grid");
+//   const shipBody = document.querySelectorAll(".thisShip");
+//   const shipHead = document.querySelectorAll(".frigateHead");
+//   const frigate = document.createElement("div");
+//   frigate.classList.add("frigateSquare");
+
+//   const dStart = (event) => {
+//     this.shipLength = event.target.childElementCount;
+//     this.flipped = event.target.classList[1];
+//     event.dataTransfer.setData("offset", event.offsetY);
+//     event.dataTransfer.setData("text/plain", event.target.id);
+//     // event.dataTransfer.setData("number", event.target.childNodes.length);
+//   };
+
+//   shipBody.forEach((ele) => {
+//     ele.setAttribute("draggable", "true");
+//     ele.addEventListener("dragstart", dStart);
+//   });
+
+//   const dOver = (e) => {
+//     e.preventDefault();
+//   };
+
+//   playerGrid.addEventListener("dragover", dOver);
+
+//   const dropIt = (e) => {
+//     e.preventDefault();
+//     const grabOffset = e.dataTransfer.getData("offset");
+//     const shipId = e.dataTransfer.getData("text/plain");
+//     // let shipLength = parseInt(
+//     //   e.dataTransfer.getData("number", e.target.childNodes.length)
+//     // );
+//     const draggedShip = document.getElementById(shipId);
+//     e.target.insertAdjacentElement("afterend", draggedShip);
+//     draggedShip.remove();
+//     // e.target.remove();
+//     this.positionOffset = grabOffset;
+//     this.mouseDropPosition = e.target.classList[1];
+//     this.add();
+//   };
+
+//   playerGrid.addEventListener("drop", dropIt);
+// }
+
+// add() {
+//   const playerGrid = document.querySelectorAll(".player .grid .square");
+
+//   const frigate = document.createElement("div");
+//   frigate.classList.add("frigateSquare");
+
+//   playerGrid.forEach((element, index, array) => {
+//     let j = index
+//     if (element.classList[1] === this.mouseDropPosition) {
+//       for (let i = 0; i < this.shipLength; i++) {
+//         if (this.flipped) {
+//           const frigate = document.createElement("div");
+//           frigate.classList.add("frigateSquare");
+//           element.insertAdjacentElement("afterend", frigate);
+//         } else {
+//           const frigate = document.createElement("div");
+//           frigate.classList.add("frigateSquare");
+//           array[j].insertAdjacentElement("afterend", frigate);
+//           console.log(array[j-1]);
+//           j = j + 10
+//         }
+//       }
+//       for (let i = 0; i < this.shipLength; i++) {
+//         if (this.flipped) {
+//           array[index].remove();
+//           index++;
+//         } else {
+//           array[index].remove();
+//           index = index + 10;
+//         }
+//       }
+//     }
+//   });
+
+//   // console.log(this.mouseDropPosition);
+//   // console.log(this.positionOffset);
+
+//   // Take a ship position
+//   // delete a dom squares
+//   // add a dom squares
+
+//   // const where = position;
+//   // const howLong = ship.length;
+//   // let body = "";
+
+//   // for (let i = 0; i < howLong; i++) {
+//   //   body += "x";
+//   // }
+
+//   // board.splice(where, howLong, ...body);
+// }

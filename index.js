@@ -25,18 +25,4 @@ const enemy = new Owner(frigate1, frigate2, frigate3, frigate4);
 
 // BEHAVIOURS STARTED
 const behaviours = new Behaviours();
-behaviours.rotate();
-behaviours.grabDrop()
-
-document.getElementById("start").addEventListener("click", () => {
-    behaviours.add(behaviours.add());
-});
-
-// behaviours.randomize(player.shipS, playerBoard.generate());
-
-// document.addEventListener("drop", (e) => {
-//   // console.log(e.target.classList[1]);
-//   behaviours.add(frigate1,playerBoard.generate(),e.target.classList[1])
-//   behaviours.add(frigate4, playerBoard.generate(), e.target.classList[1]);
-//   console.log();
-// });
+behaviours.chose()
