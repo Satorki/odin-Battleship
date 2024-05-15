@@ -12,16 +12,8 @@ class Behaviours {
   rotateShip() {
     this.domShip.forEach((element) => {
       element.addEventListener("dblclick", () => {
-        if (element.classList.value === "thisShip flip") {
-          element.classList.remove("flip");
-        } else {
-          element.classList.add("flip");
-        }
-        if (element.classList.value === "thisShip flip") {
-          this.shipRotate = true;
-        } else {
-          this.shipRotate = false;
-        }
+        element.classList.toggle("flip");
+        this.shipRotate = element.classList.contains("flip");
       });
     });
   }
@@ -36,6 +28,7 @@ class Behaviours {
   choseShip() {
     this.domShip.forEach((element) => {
       element.addEventListener("click", (e) => {
+        this.shipRotate = element.classList.contains("flip");
         this.stylizeShip(element);
         this.shipChose = e.target.parentNode.id;
         this.shipLength = e.target.parentNode.childNodes.length;
@@ -48,6 +41,7 @@ class Behaviours {
       element.addEventListener("click", (e) => {
         this.placeForShipChoseDom = e.target;
         this.placeForShipChoseNumber = e.target.classList[1];
+        this.addShipToPlayerBoard();
       });
     });
   }
@@ -76,13 +70,24 @@ class Behaviours {
   }
 
   addShipToPlayerBoard() {
-    this.domPlayerGrid.forEach((element) => {
-      element.addEventListener("click", () => {
-        this.shipCreate();
-        console.log(this.shipCreate()[0]);
-        console.log(element.classList[1]);
-      });
-    });
+    const shipCreated = this.shipCreate();
+
+    for (let i = 0; i < this.domPlayerGrid.length; i++) {
+      if (shipCreated[i] > 99) {
+        return alert("Bad position");
+      } else {
+        for (let j = 0; j < shipCreated.length; j++) {
+          if (parseInt(this.domPlayerGrid[i].classList[1]) === shipCreated[j]) {
+            console.log(this.domPlayerGrid[i].classList[1]);
+            this.domPlayerGrid[i].insertAdjacentElement(
+              "afterend",
+              this.shipDomPartCreate()
+            );
+            this.domPlayerGrid[i].remove();
+          }
+        }
+      }
+    }
   }
 }
 

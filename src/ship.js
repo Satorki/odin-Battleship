@@ -11,7 +11,7 @@ class Ship {
     shipDiv.id = this.name;
     sector.appendChild(shipDiv);
     const frigate = document.createElement("div");
-    frigate.classList.add("frigateSquare", "frigateHead");
+    frigate.classList.add("frigateSquare");
     shipDiv.appendChild(frigate);
 
     for (let i = 1; i < this.length; i++) {

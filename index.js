@@ -24,7 +24,7 @@ const behaviours = new Behaviours();
 behaviours.rotateShip();
 behaviours.choseShip();
 behaviours.choosePlaceForShip();
-behaviours.addShipToPlayerBoard()
+//behaviours.addShipToPlayerBoard()
 
 // ADDED SHIPS FOR PLAYER and ENEMY
 const player = new Owner(frigate1, frigate2, frigate3, frigate4);
