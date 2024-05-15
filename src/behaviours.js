@@ -19,20 +19,30 @@ class Behaviours {
   }
 
   stylizeShip(ship) {
-    ship.style.boxShadow = "0 0 10px 2px white";
+    ship.classList.add("frigateChoosed");
   }
   unstylizeShip(ship) {
-    ship.style.boxShadow = "none";
+    ship.classList.remove("frigateChoosed");
   }
 
   choseShip() {
     this.domShip.forEach((element) => {
       element.addEventListener("click", (e) => {
-        this.shipRotate = element.classList.contains("flip");
+        this.domShip.forEach((ship) => {
+          this.unstylizeShip(ship);
+        });
         this.stylizeShip(element);
+        this.shipRotate = element.classList.contains("flip");
         this.shipChose = e.target.parentNode.id;
         this.shipLength = e.target.parentNode.childNodes.length;
       });
+    });
+  }
+  deleteChosedShip() {
+    this.domShip.forEach((element) => {
+      if (element.id === this.shipChose) {
+        element.remove();
+      }
     });
   }
 
@@ -73,17 +83,25 @@ class Behaviours {
     const shipCreated = this.shipCreate();
 
     for (let i = 0; i < this.domPlayerGrid.length; i++) {
+      console.log(shipCreated.length); // wot
+      console.log(this.placeForShipChoseNumber % 10);
+      if (
+        this.shipRotate &&
+        shipCreated.length < this.placeForShipChoseNumber % 10
+      ) {
+        return alert("Bad position");
+      }
       if (shipCreated[i] > 99) {
         return alert("Bad position");
       } else {
         for (let j = 0; j < shipCreated.length; j++) {
           if (parseInt(this.domPlayerGrid[i].classList[1]) === shipCreated[j]) {
-            console.log(this.domPlayerGrid[i].classList[1]);
             this.domPlayerGrid[i].insertAdjacentElement(
               "afterend",
               this.shipDomPartCreate()
             );
             this.domPlayerGrid[i].remove();
+            this.deleteChosedShip();
           }
         }
       }
