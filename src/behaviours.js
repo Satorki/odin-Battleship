@@ -13,9 +13,12 @@ class Behaviours {
       element.addEventListener("dblclick", () => {
         if (element.classList.value === "thisShip flip") {
           element.classList.remove("flip");
-          this.shipVertical = false;
         } else {
           element.classList.add("flip");
+        }
+        if (element.classList.value === "thisShip flip") {
+          this.shipVertical = false;
+        } else {
           this.shipVertical = true;
         }
       });
@@ -24,6 +27,9 @@ class Behaviours {
 
   stylizeShip(ship) {
     ship.style.boxShadow = "0 0 10px 2px white";
+  }
+  unstylizeShip(ship) {
+    ship.style.boxShadow = "none";
   }
 
   choseShip() {
@@ -36,20 +42,39 @@ class Behaviours {
     });
   }
 
-  chosePlaceForShip() {
+  choosePlaceForShip() {
     this.playerGrid.forEach((element) => {
       element.addEventListener("click", (e) => {
-        this.placeForShip = e.target.classList[1];
+        this.placeForShip = e.target
       });
     });
   }
 
+  shipPartCreate() {
+    const shipPart = document.createElement("div");
+    shipPart.classList.add("frigateSquare");
+
+    return shipPart;
+  }
+
+  addPlayerBoardSquares(shipPlace, shipPart) {
+    shipPlace.insertAdjacentElement("afterend", shipPart);
+  }
+  deletePlayerBoardSquares(shipPart) {
+    shipPart.remove();
+  }
+
   addShipToPlayerBoard() {
     const choosedShipLength = this.shipLength;
-    const choosedPlaceForShip = this.placeForShip;
     const choosedShipVertical = this.shipVertical;
 
-    this.playerGrid.forEach((element) => {});
+    this.playerGrid.forEach((element) => {
+      element.addEventListener("click", () => {
+        console.log(this.placeForShip);
+        this.addPlayerBoardSquares(this.placeForShip, this.shipPartCreate());
+        this.deletePlayerBoardSquares(this.placeForShip)
+      });
+    });
   }
 }
 
