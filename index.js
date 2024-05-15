@@ -19,10 +19,20 @@ frigate2.generateDom();
 frigate3.generateDom();
 frigate4.generateDom();
 
+// BEHAVIOURS STARTED
+const behaviours = new Behaviours();
+behaviours.choseShip();
+behaviours.chosePlaceForShip();
+behaviours.rotateShip()
+
 // ADDED SHIPS FOR PLAYER and ENEMY
 const player = new Owner(frigate1, frigate2, frigate3, frigate4);
 const enemy = new Owner(frigate1, frigate2, frigate3, frigate4);
 
-// BEHAVIOURS STARTED
-const behaviours = new Behaviours();
-behaviours.chose()
+const playerGrid = document.querySelectorAll(".player .grid .square");
+
+playerGrid.forEach((element) => {
+  element.addEventListener("click", () => {
+    behaviours.addShipToPlayerBoard();
+  });
+});

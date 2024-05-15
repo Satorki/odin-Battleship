@@ -1,50 +1,56 @@
 class Behaviours {
-  chose() {
-    const ship = document.querySelectorAll(".thisShip");
-
-    ship.forEach((element) => {
-      element.addEventListener("click", (e) => {
-        const selectedShip = e.target.parentNode;
-        selectedShip.style.boxShadow = "0 0 10px 2px white";
-        selectedShip.dataset.shipId = selectedShip.id;
-        this.add(selectedShip);
-      });
-    });
+  constructor() {
+    this.shipVertical = true;
+    this.selectedShip = null;
+    this.shipLength = null;
+    this.placeForShip = null;
+    this.shipsDom = document.querySelectorAll(".thisShip");
+    this.playerGrid = document.querySelectorAll(".player .grid .square");
   }
 
-  add(ship) {
-    const shipLength = ship.childNodes.length;
-    const playerGrid = document.querySelectorAll(".player .grid");
-
-    playerGrid.forEach((element, index, array) => {
-      element.addEventListener("click", (e) => {
-        let j = index;
-        for (let i = 0; i < this.shipLength; i++) {
-          const frigate = document.createElement("div");
-          frigate.classList.add("frigateSquare");
-          array[j].insertAdjacentElement("afterend", frigate);
-          console.log(array[j - 1]);
-          j = j + 10;
-        }
-        for (let i = 0; i < this.shipLength; i++) {
-          array[index].remove();
-          index = index + 10;
+  rotateShip() {
+    this.shipsDom.forEach((element) => {
+      element.addEventListener("dblclick", () => {
+        if (element.classList.value === "thisShip flip") {
+          element.classList.remove("flip");
+          this.shipVertical = false;
+        } else {
+          element.classList.add("flip");
+          this.shipVertical = true;
         }
       });
     });
   }
 
-  // randomize(ships, board) {
-  //   const randomPosition = Math.floor(Math.random() * 90);
-  //   let position = randomPosition;
+  stylizeShip(ship) {
+    ship.style.boxShadow = "0 0 10px 2px white";
+  }
 
-  //   ships.forEach((element) => {
-  //     this.add(element, board, position * element.length);
-  //   });
+  choseShip() {
+    this.shipsDom.forEach((element) => {
+      element.addEventListener("click", (e) => {
+        this.stylizeShip(element);
+        this.selectedShip = e.target.parentNode.id;
+        this.shipLength = e.target.parentNode.childNodes.length;
+      });
+    });
+  }
 
-  //   //console.log(board);
-  //   return board;
-  // }
+  chosePlaceForShip() {
+    this.playerGrid.forEach((element) => {
+      element.addEventListener("click", (e) => {
+        this.placeForShip = e.target.classList[1];
+      });
+    });
+  }
+
+  addShipToPlayerBoard() {
+    const choosedShipLength = this.shipLength;
+    const choosedPlaceForShip = this.placeForShip;
+    const choosedShipVertical = this.shipVertical;
+
+    this.playerGrid.forEach((element) => {});
+  }
 }
 
 export { Behaviours };
