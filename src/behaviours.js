@@ -1,6 +1,6 @@
 class Behaviours {
   constructor() {
-    this.shipRotate = true;
+    this.shipRotate = false;
     this.shipChose = null;
     this.shipLength = null;
     this.placeForShipChoseDom = null;
@@ -18,9 +18,9 @@ class Behaviours {
           element.classList.add("flip");
         }
         if (element.classList.value === "thisShip flip") {
-          this.shipRotate = false;
-        } else {
           this.shipRotate = true;
+        } else {
+          this.shipRotate = false;
         }
       });
     });
@@ -52,39 +52,36 @@ class Behaviours {
     });
   }
 
-  shipPartCreate() {
+  shipDomPartCreate() {
     const shipPart = document.createElement("div");
     shipPart.classList.add("frigateSquare");
-
     return shipPart;
   }
 
-  addPlayerBoardSquares(shipPlace, shipPart) {
-    console.log(shipPlace);
-    console.log();
-
-    shipPlace.insertAdjacentElement("afterend", shipPart);
+  shipCreate() {
+    let shipPlacedNumbers = [];
+    let shipNumberSwitch = parseInt(this.placeForShipChoseNumber);
     if (this.shipRotate) {
-      for (let i = 0; i < this.shipLength - 1; i++) {
-        const clonedShipPart = shipPart.cloneNode(true);
-        shipPart.insertAdjacentElement("afterend", clonedShipPart);
+      for (let i = 0; i < this.shipLength; i++) {
+        shipPlacedNumbers.push(shipNumberSwitch);
+        shipNumberSwitch++;
       }
     } else {
-      for (let i = 0; i < this.shipLength - 1; i++) {
-        const clonedShipPart = shipPart.cloneNode(true);
+      for (let i = 0; i < this.shipLength; i++) {
+        shipPlacedNumbers.push(shipNumberSwitch);
+        shipNumberSwitch = shipNumberSwitch + 10;
       }
     }
-  }
-  deletePlayerBoardSquares(shipPart) {
-    shipPart.remove();
+    return shipPlacedNumbers;
   }
 
   addShipToPlayerBoard() {
     this.domPlayerGrid.forEach((element) => {
       element.addEventListener("click", () => {
-        this.addPlayerBoardSquares(this.placeForShipChoseDom, this.shipPartCreate());
-        this.deletePlayerBoardSquares();
-       });
+        this.shipCreate();
+        console.log(this.shipCreate()[0]);
+        console.log(element.classList[1]);
+      });
     });
   }
 }
