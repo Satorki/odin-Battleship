@@ -96,6 +96,10 @@ body {
   text-align: center;
   cursor: pointer;
 }
+.player .square:hover {
+  background-color: #62bcf8;
+}
+
 .shipSector {
   height: 130px;
   display: flex;
