@@ -83,11 +83,9 @@ class Behaviours {
     const shipCreated = this.shipCreate();
 
     for (let i = 0; i < this.domPlayerGrid.length; i++) {
-      console.log(shipCreated.length); // wot
-      console.log(this.placeForShipChoseNumber % 10);
       if (
         this.shipRotate &&
-        shipCreated.length < this.placeForShipChoseNumber % 10
+        10 - (this.placeForShipChoseNumber % 10) < shipCreated.length
       ) {
         return alert("Bad position");
       }

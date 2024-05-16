@@ -21,10 +21,10 @@ class Ship {
     }
   }
 
-  domId(){
-    const shipId = document.querySelector("#"+ this.name)
-    return shipId
-  }
+  // domId(){
+  //   const shipId = document.querySelector("#"+ this.name)
+  //   return shipId
+  // }
 
   // add() {
   //   const draggedShip = document.getElementById("#" + this.name);
