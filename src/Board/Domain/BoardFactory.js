@@ -16,7 +16,12 @@ class BoardFactory {
     if (null === selector) {
       console.log("Invalid owner!");
     }
-    return new Board(selector, boardInput.getHeight(), boardInput.getWidth());
+    return new Board(
+      boardInput.getOwner(),
+      selector,
+      boardInput.getHeight(),
+      boardInput.getWidth()
+    );
   }
 }
 

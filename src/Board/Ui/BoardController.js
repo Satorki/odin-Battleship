@@ -8,6 +8,14 @@ class BoardController {
   createBoard(boardInput) {
     this.boardService.generateBoardUi(boardInput);
   }
+
+  placeShip(placeShipInput) {
+    try {
+      this.boardService.addShipToBoardUi(placeShipInput);
+    } catch (error) {
+      alert(error);
+    }
+  }
 }
 
 export { BoardController };

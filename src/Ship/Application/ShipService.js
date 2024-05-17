@@ -1,8 +1,10 @@
 import { ShipFactory } from "../Domain/ShipFactory.js";
+import { ShipRepository } from "../Infrastructure/localstorage/ShipRepository.js";
 
 class ShipService {
   constructor() {
     this.shipFactory = new ShipFactory();
+    this.shipRepository = new ShipRepository();
   }
   generateShipUI(shipInput) {
     const ship = this.shipFactory.createByInput(shipInput);
@@ -20,7 +22,7 @@ class ShipService {
       frigate.classList.add("frigateSquare");
       shipDiv.appendChild(frigate);
     }
-
+    this.shipRepository.save(ship);
     this.#provideShipBehaviours(shipInput);
   }
 
@@ -37,14 +39,13 @@ class ShipService {
     const currentShipSelector = this.#getShipSelectorByInput(shipInput);
     currentShipSelector.addEventListener("dblclick", () => {
       currentShipSelector.classList.toggle("flip");
-      this.isShipRotated = currentShipSelector.classList.contains("flip");
     });
   }
 
   #stylize(shipSelector) {
-    const otherShips = Array.from(document
-      .querySelectorAll(".thisShip"))
-      .filter((ship) => ship.id !== shipSelector.id);
+    const otherShips = Array.from(
+      document.querySelectorAll(".thisShip")
+    ).filter((ship) => ship.id !== shipSelector.id);
     shipSelector.classList.add("frigateChoosed");
     otherShips.forEach((otherShip) => {
       otherShip.classList.remove("frigateChoosed");
@@ -54,34 +55,31 @@ class ShipService {
   #makeChoosable(shipInput) {
     const currentShipSelector = this.#getShipSelectorByInput(shipInput);
 
-    currentShipSelector.addEventListener("click", (e) => {
+    currentShipSelector.addEventListener("click", () => {
       this.#stylize(currentShipSelector);
-      // this.isShipPlaced = false;
-      // this.shipChoosed = currentShipSelector.id;
+      this.#setActualChoosed(shipInput);
     });
   }
-  #isShipRotated(shipInput){
+  shipIsHorizontal(shipInput) {
     const currentShipSelector = this.#getShipSelectorByInput(shipInput);
     return currentShipSelector.classList.contains("flip");
   }
 
-  createBodyArray() {
-    let shipPlacedNumbers = [];
-    let shipNumberSwitch = parseInt(this.choosedPlaceNumber);
-    if (this.isShipRotated) {
-      for (let i = 0; i < this.shipLength; i++) {
-        shipPlacedNumbers.push(shipNumberSwitch);
-        shipNumberSwitch++;
-      }
-    } else {
-      for (let i = 0; i < this.shipLength; i++) {
-        shipPlacedNumbers.push(shipNumberSwitch);
-        shipNumberSwitch = shipNumberSwitch + 10;
-      }
-    }
-    return shipPlacedNumbers;
+  getChosedShip() {
+    return this.#getActualChoosed();
   }
 
+  #setActualChoosed(shipInput) {
+    const ships = this.shipRepository.findAll();
+    this.shipRepository.save(shipInput);
+    //ships.filter((ship) => ship.isChoosed() = true)
+  }
+
+  #getActualChoosed() {
+    const ships = this.shipRepository.findAll();
+    console.log(ships);
+    return ships.filter((ship) => ship.isChoosed());
+  }
 }
 
 export { ShipService };

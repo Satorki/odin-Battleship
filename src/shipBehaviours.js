@@ -10,10 +10,6 @@ class ShipBehaviours {
     this.domGridSelector = document.querySelectorAll(".player .grid .square");
   }
 
-
-
-
-
   deleteChoosed() {
     this.domShipSelector.forEach((element) => {
       if (element.id === this.shipChoosed) {
@@ -41,32 +37,18 @@ class ShipBehaviours {
     return shipPart;
   }
 
-
-
   addToBoard() {
     let shipCreated = this.createBodyArray();
 
     for (let i = 0; i < this.domGridSelector.length; i++) {
-      if (
-        this.isShipRotated &&
-        10 - (this.choosedPlaceNumber % 10) < shipCreated.length
-      ) {
-        return alert("Bad position");
-      }
-      if (shipCreated[i] > 99) {
-        return alert("Bad position");
-      } else {
-        for (let j = 0; j < shipCreated.length; j++) {
-          if (
-            parseInt(this.domGridSelector[i].classList[1]) === shipCreated[j]
-          ) {
-            this.domGridSelector[i].insertAdjacentElement(
-              "afterend",
-              this.createPartDom()
-            );
-            this.domGridSelector[i].remove();
-            this.deleteChoosed();
-          }
+      for (let j = 0; j < shipCreated.length; j++) {
+        if (parseInt(this.domGridSelector[i].classList[1]) === shipCreated[j]) {
+          this.domGridSelector[i].insertAdjacentElement(
+            "afterend",
+            this.createPartDom()
+          );
+          this.domGridSelector[i].remove();
+          this.deleteChoosed();
         }
       }
     }
