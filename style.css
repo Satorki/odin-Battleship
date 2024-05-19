@@ -96,7 +96,53 @@ body {
   text-align: center;
   cursor: pointer;
 }
+.ship {
+  background-color: #6eb24e;
+}
+
 .player .square:hover {
+  background-color: #62bcf8;
+}
+
+.enabled:hover {
+  background-color: #62bcf8;
+  cursor: pointer;
+}
+
+.sunk {
+  background: linear-gradient(
+      to top left,
+      rgba(0, 0, 0, 0) 0%,
+      rgba(0, 0, 0, 0) calc(50% - 0.8px),
+      rgba(0, 0, 0, 1) 50%,
+      rgba(0, 0, 0, 0) calc(50% + 0.8px),
+      rgba(0, 0, 0, 0) 100%
+    ),
+    linear-gradient(
+      to top right,
+      rgba(0, 0, 0, 0) 0%,
+      rgba(0, 0, 0, 0) calc(50% - 0.8px),
+      rgba(0, 0, 0, 1) 50%,
+      rgba(0, 0, 0, 0) calc(50% + 0.8px),
+      rgba(0, 0, 0, 0) 100%
+    );
+}
+
+.miss {
+  background-color: #f8f8f8;
+}
+
+.hit {
+  background-color: #af3d3d;
+}
+
+.disabled {
+  cursor: auto;
+  pointer-events: none;
+}
+
+.enemy .gameStarted .square:hover {
+  cursor: pointer;
   background-color: #62bcf8;
 }
 
@@ -149,4 +195,12 @@ body {
 }
 .menu button:active {
   box-shadow: inset 1px 1px 5px 0px #000;
+}
+
+button:disabled,
+button[disabled] {
+  border: 1px solid #999999;
+  background-color: #cccccc;
+  color: #666666;
+  cursor: not-allowed;
 }

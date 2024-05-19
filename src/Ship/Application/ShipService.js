@@ -1,5 +1,5 @@
 import { ShipFactory } from "../Domain/ShipFactory.js";
-import { ShipRepository } from "../Infrastructure/localstorage/ShipRepository.js";
+import ShipRepository from "../Infrastructure/localStorage/ShipRepository.js";
 
 class ShipService {
   constructor() {
@@ -23,22 +23,30 @@ class ShipService {
       shipDiv.appendChild(frigate);
     }
     this.shipRepository.save(ship);
-    this.#provideShipBehaviours(shipInput);
+
+    this.#provideShipBehaviours(ship);
   }
 
-  #provideShipBehaviours(shipInput) {
-    this.#makeRotatable(shipInput);
-    this.#makeChoosable(shipInput);
+  createEnemyShip(shipInput) {
+    const ship = this.shipFactory.createByInput(shipInput);
+    this.shipRepository.save(ship);
   }
 
-  #getShipSelectorByInput(shipInput) {
-    return document.querySelector(`#${shipInput.getName()}`);
+  #provideShipBehaviours(ship) {
+    this.#makeRotatable(ship);
+    this.#makeChoosable(ship);
   }
 
-  #makeRotatable(shipInput) {
-    const currentShipSelector = this.#getShipSelectorByInput(shipInput);
+  #getShipSelector(ship) {
+    return document.querySelector(`#${ship.getName()}`);
+  }
+
+  #makeRotatable(ship) {
+    const currentShipSelector = this.#getShipSelector(ship);
     currentShipSelector.addEventListener("dblclick", () => {
       currentShipSelector.classList.toggle("flip");
+      ship.setIsHorizontal(this.#isShipRotated(ship));
+      this.shipRepository.setCurrentSelectedShip(ship);
     });
   }
 
@@ -52,33 +60,22 @@ class ShipService {
     });
   }
 
-  #makeChoosable(shipInput) {
-    const currentShipSelector = this.#getShipSelectorByInput(shipInput);
+  #makeChoosable(ship) {
+    const currentShipSelector = this.#getShipSelector(ship);
 
-    currentShipSelector.addEventListener("click", () => {
+    currentShipSelector.addEventListener("click", (e) => {
+      this.shipRepository.setCurrentSelectedShip(ship);
       this.#stylize(currentShipSelector);
-      this.#setActualChoosed(shipInput);
     });
   }
-  shipIsHorizontal(shipInput) {
-    const currentShipSelector = this.#getShipSelectorByInput(shipInput);
+  #isShipRotated(ship) {
+    const currentShipSelector = this.#getShipSelector(ship);
     return currentShipSelector.classList.contains("flip");
   }
 
-  getChosedShip() {
-    return this.#getActualChoosed();
-  }
-
-  #setActualChoosed(shipInput) {
-    const ships = this.shipRepository.findAll();
-    this.shipRepository.save(shipInput);
-    //ships.filter((ship) => ship.isChoosed() = true)
-  }
-
-  #getActualChoosed() {
-    const ships = this.shipRepository.findAll();
-    console.log(ships);
-    return ships.filter((ship) => ship.isChoosed());
+  isAllShipsSunk(owner) {
+    const ships = this.shipRepository.getShips(owner);
+    return ships.every((ship) => ship.sunk);
   }
 }
 

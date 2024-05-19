@@ -1,18 +1,55 @@
 class Ship {
-  constructor(name, length) {
-    (this.name = name), (this.length = length), (this.isChoosed = false);
+  constructor(
+    owner,
+    name,
+    length,
+    isHorizontal = false,
+    placed = false,
+    hitted = 0,
+    sunk = false
+  ) {
+    this.owner = owner;
+    this.name = name;
+    this.length = length;
+    this.isHorizontal = isHorizontal;
+    this.placed = placed;
+    this.hitted = hitted;
+    this.positions = [];
+    this.sunk = sunk;
   }
+  getOwner() {
+    return this.owner;
+  }
+
   getName() {
     return this.name;
   }
   getLength() {
     return this.length;
   }
-  isChoosed() {
-    return this.isChoosed();
+
+  setIsHorizontal(isHorizontal) {
+    this.isHorizontal = isHorizontal;
   }
-  setChoosed(choosed){
-    this.isChoosed = choosed
+
+  isHorizontal() {
+    return this.isHorizontal;
+  }
+  getPlaced() {
+    return this.placed;
+  }
+  getPositions() {
+    return this.positions;
+  }
+
+  setPositions(positions) {
+    this.positions = positions;
+  }
+  setSunk(sunk) {
+    this.sunk = sunk;
+  }
+  getSunk() {
+    return this.sunk;
   }
 }
 

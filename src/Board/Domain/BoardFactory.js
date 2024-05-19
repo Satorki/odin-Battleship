@@ -14,7 +14,7 @@ class BoardFactory {
   createByInput(boardInput) {
     const selector = this.#getSelectorByOwner(boardInput.getOwner());
     if (null === selector) {
-      console.log("Invalid owner!");
+      alert("Invalid owner!");
     }
     return new Board(
       boardInput.getOwner(),

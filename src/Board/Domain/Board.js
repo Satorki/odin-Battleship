@@ -4,15 +4,19 @@ class Board {
     this.selector = selector;
     this.height = height;
     this.width = width;
-    this.ground = this.#generateGround();
+    this.board = this.#generateBoard();
+    this.length = this.height * this.width - 1;
   }
-
-  #generateGround() {
-    const ground = [];
-    for (let i = this.width; i <= this.width * this.height; i++) {
-      ground.push(i);
+  #generateBoard() {
+    const board = [];
+    for (let i = 0; i < this.height; i++) {
+      const row = [];
+      for (let j = 0; j < this.width; j++) {
+        row.push(null);
+      }
+      board.push(row);
     }
-    return ground;
+    return board;
   }
 
   getOwner() {
@@ -27,8 +31,11 @@ class Board {
   getWidth() {
     return this.width;
   }
-  getGround() {
-    return this.ground;
+  getBoard() {
+    return this.board;
+  }
+  getLength() {
+    return this.length;
   }
 }
 

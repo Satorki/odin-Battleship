@@ -1,6 +1,11 @@
 class ShipInput {
-  constructor(name, length) {
-    (this.name = name), (this.length = length);
+  constructor(owner, name, length) {
+    this.owner = owner;
+    this.name = name;
+    this.length = length;
+  }
+  getOwner() {
+    return this.owner;
   }
   getName() {
     return this.name;
