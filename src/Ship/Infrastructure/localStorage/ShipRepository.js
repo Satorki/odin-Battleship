@@ -50,7 +50,10 @@ class ShipRepository {
     this.save(placedShip);
     if (ship.owner === "player") {
       localStorage.removeItem("currentSelectedShip");
-      document.getElementById(name).remove();
+      document.getElementById(name).classList.add("frigateDisapear");
+      setTimeout(function () {
+        document.getElementById(name).classList.add("frigateDelete");
+      }, 500);
     }
   }
 }

@@ -15,7 +15,6 @@ class BoardService {
       let newSquare = document.createElement("div");
       newSquare.classList.add("square", i);
       gridDom.appendChild(newSquare);
-      newSquare.textContent = i;
     }
     this.boardRepository.save(board);
   }
