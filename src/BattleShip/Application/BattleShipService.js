@@ -3,7 +3,9 @@ import { BattleShipRepository } from "../Infrastructure/localStorage/BattleShipR
 class BattleShipService {
   constructor() {
     this.battleShipRepository = new BattleShipRepository();
+    
   }
+  
 
   resetGame() {
     this.battleShipRepository.resetGame();
@@ -11,6 +13,7 @@ class BattleShipService {
   }
 
   endGame(winner) {
+    
     alert(`Game Over! ${winner} won!`);
     this.resetGame();
   }

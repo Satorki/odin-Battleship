@@ -92,7 +92,7 @@ body {
 
 /* PLAYER SIDE */
 .player {
-  margin-top: 100px;
+  margin-top: 30px;
 }
 .player .name {
   color: var(--player-color);
@@ -218,7 +218,7 @@ body {
 button:disabled,
 button[disabled] {
   border: 1px solid #999999;
-  background-color: #cccccc;
+  background-color: var(--button-color);
   color: #666666;
   cursor: not-allowed;
 }
